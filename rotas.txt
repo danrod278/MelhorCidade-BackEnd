@@ -1,0 +1,5 @@
+rotas inicias:
+	Login
+	Criar Usuario
+	Relatar irregularidade
+	Confirmar irregularidade
