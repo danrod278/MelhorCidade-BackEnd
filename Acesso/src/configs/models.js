@@ -1,1 +1,1 @@
-const Usuario = require('../models/novoUsuarioBD')
+const Usuario = require('../models/Usuario')

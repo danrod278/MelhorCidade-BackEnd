@@ -9,23 +9,11 @@ const novoUsuarioSchemma = new Schema({
         type: String,
         required:true
     },
-    idade:{
-        type: String,
-        required:true
-    },
-    CPF:{
-        type: String,
-        required:true
-    },
     senha:{
         type: String,
         required:true
     },
     tipoUsuario:{
-        type: String,
-        required:true
-    },
-    endereco:{
         type: String,
         required:true
     },
