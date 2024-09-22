@@ -2,7 +2,7 @@ const express = require("express")
 
 const bodyParser = require('body-parser')
 const session = require("express-session")
-const dotenvVariables = require("../../../dotenvVariables")
+const dotenvVariables = require("../../dotenvVariables")
 const app = express()
 
 app.use(bodyParser.json())

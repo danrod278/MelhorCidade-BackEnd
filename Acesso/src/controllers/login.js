@@ -1,14 +1,14 @@
-const {criarUsuario} = require('../services/novo_usuario')
+const {logar} = require('../services/login')
 
 exports.criarUsuarioController = async (req, res)=>{
     try{
-        console.log("Entrou na rota")
-        const params = req.params
+        
+        const params = req.body
         let data = {
                 email:params.email,
                 senha:params.senha,
         }
-        criarUsuario(data, res)
+        logar(data, res)
     }catch(err){
         console.error('Erro ao criar novo usuario ' +err)
     }

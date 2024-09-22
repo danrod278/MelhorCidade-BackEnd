@@ -1,4 +1,4 @@
-const {Usuario} = require('../models/novoUsuarioBD')
+const {Usuario} = require('../models/Usuario')
 
 exports.NovoUsuario = async (data)=>{
     try{
@@ -14,7 +14,6 @@ exports.NovoUsuario = async (data)=>{
 exports.verificarCadastros = async(data)=>{
     try{
         const consulta = await Usuario.find({email:data.email})
-        
         
         return consulta
 
