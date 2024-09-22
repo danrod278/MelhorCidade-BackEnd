@@ -29,8 +29,12 @@ exports.criarUsuario = async (data, res)=>{
             data.senha = await criptografarSenha(data.senha)
             data.tipoUsuario="comum"
             console.log(data)
-            await NovoUsuario(data)
-            res.status(200).json(data)
+            const salvoStatus = await NovoUsuario(data)
+            if(salvoStatus){
+                res.status(200).json(data)
+            }else{
+                res.status(400).json({mensage:"Erro ao salvar no banco de dados (Possível campo faltando)", status:false})
+            }
         }
     }catch(err){
         console.error('Houve um erro no processo de criação de usuario '+err)
