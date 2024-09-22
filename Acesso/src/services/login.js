@@ -1,4 +1,4 @@
-const {verificarCadastros} = require('../repositories/usuarios')
+const {verificarCadastros, salvarHash} = require('../repositories/usuarios')
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require("bcrypt")
 
@@ -9,7 +9,7 @@ exports.buscaCadastros = async (data)=>{
         
         if(testBusca.length>0){
             
-            return [true, testBusca[0].senha]
+            return [true, testBusca[0].senha, testBusca[0]._id]
         }else{
             return [false]
         }
@@ -27,19 +27,23 @@ exports.logar = async (data, res, req)=>{
             if (testCompare){   
                 const hash = uuidv4();
                 res.cookie("hashTemporario", hash, { maxAge: 300000 })
-        
+                res.cookie("IDUsuario", usuario[2], {maxAge: 300000})
                 
+                const statusGravacao = await salvarHash(usuario[2], hash)
                 
-                res.status(200).json({ acesso: true, mensage: "Acesso liberado", cookie: hash });
-                
+                if(statusGravacao){
+                    res.status(200).json({ acesso: true, mensage: "Acesso liberado", cookie: hash });                
+                }else{
+                    res.status(400).json({ acesso: false, mensage: "Erro ao gravar hash"});
+                }
             }else{
                 res.status(401).json({acesso:false, mensage:"Dados incorretos"})
             }
-            
-        }
-        else{
+        }else{
             res.status(401).json({acesso:false, mensage:"Dados incorretos"})
         }
+        
+        
     }catch(err){
         console.error('Houve um erro no processo de login '+err)
     }
