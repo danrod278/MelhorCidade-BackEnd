@@ -1,4 +1,4 @@
-const {verificarCadastros, NovoUsuario} = require('../repositories/usuarios')
+const {verificarCadastros} = require('../repositories/usuarios')
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require("bcrypt")
 
@@ -18,21 +18,30 @@ exports.buscaCadastros = async (data)=>{
     }
 }
 
-exports.logar = async (data, res)=>{
+exports.logar = async (data, res, req)=>{
     try{
         const usuario = await this.buscaCadastros(data)
         if(usuario[0]){
             const testCompare = await comparar(data.senha, usuario[1])
             
-            if (testCompare){
-                res.status(200).json({acesso:true, mensage:"Acesso liberado"})
+            if (testCompare){   
+                const hash = uuidv4();
+                res.cookie("hashTemporario", hash, { maxAge: 300000 })
+        
+                
+                
+                res.status(200).json({ acesso: true, mensage: "Acesso liberado", cookie: hash });
+                
+            }else{
+                res.status(401).json({acesso:false, mensage:"Dados incorretos"})
             }
+            
         }
         else{
             res.status(401).json({acesso:false, mensage:"Dados incorretos"})
         }
     }catch(err){
-        console.error('Houve um erro no processo de criação de usuario '+err)
+        console.error('Houve um erro no processo de login '+err)
     }
 }
 
