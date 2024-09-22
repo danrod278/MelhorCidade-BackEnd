@@ -9,6 +9,17 @@ const novoUsuarioSchemma = new Schema({
         type: String,
         required:true
     },
+<<<<<<< HEAD:Acesso/src/models/Usuario.js
+=======
+    idade:{
+        type: String,
+        required:true
+    },
+    telefone:{
+        type: String,
+        required:true
+    },
+>>>>>>> eb5121eb5f485c71e52e6084d253b3a5aa37902d:CriarUsuario/src/models/novoUsuarioBD.js
     senha:{
         type: String,
         required:true
