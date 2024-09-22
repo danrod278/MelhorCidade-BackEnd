@@ -31,7 +31,7 @@ exports.criarUsuario = async (data, res)=>{
             console.log(data)
             const salvoStatus = await NovoUsuario(data)
             if(salvoStatus){
-                res.status(200).json(data)
+                res.status(200).json({dados:data, mensage:"Conta criada com sucesso"})
             }else{
                 res.status(400).json({mensage:"Erro ao salvar no banco de dados (Possível campo faltando)", status:false})
             }
