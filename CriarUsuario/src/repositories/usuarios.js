@@ -11,12 +11,11 @@ exports.NovoUsuario = async (data)=>{
     }
 }
 
-exports.verificarCadastros = async(email, cpf)=>{
+exports.verificarCadastros = async(email)=>{
     try{
         const emailQuery = await Usuario.find({email:email})
-        const cpfQuery = await Usuario.find({CPF:cpf})
-        
-        return {email:emailQuery, cpf:cpfQuery}
+        console.log(emailQuery)
+        return emailQuery
 
     }catch(err){
         console.error('Houve um erro ao buscar um cadastro '+err)

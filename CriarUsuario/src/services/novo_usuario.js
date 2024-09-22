@@ -3,19 +3,16 @@ const { v4: uuidv4 } = require('uuid');
 const bcrypt = require("bcrypt")
 const {dotEnvVariables} = require("../../../dotenvVariables")
 
-exports.buscaCadastros = async (email, cpf)=>{
+exports.buscaCadastros = async (email)=>{
     try{
         
-        const testExistencia = await verificarCadastros(email, cpf)
-        let status={email:false, cpf:false}
-       
-        if(testExistencia.email.length>0){
-            status.email=true
+        const testExistencia = await verificarCadastros(email)
+        if(testExistencia.length>0){
+            return false
+            
+        }else{
+            return true
         }
-        if(testExistencia.cpf.length>0){
-            status.cpf=true
-        }
-        return status
     }catch(err){
         console.error('Houve um erro no processo de verificação de cadastro '+err)
     }
@@ -24,15 +21,15 @@ exports.buscaCadastros = async (email, cpf)=>{
 exports.criarUsuario = async (data, res)=>{
     try{
         
-        const permicao = await this.buscaCadastros(data.email, data.CPF)
-        console.log(permicao.email || permicao.cpf)
-        if(permicao.email || permicao.cpf){
+        const permicao = await this.buscaCadastros(data.email)
+        if(!permicao){
             res.status(400).json({error:"Essa conta ja existe"})
         }else{
             data._id = uuidv4()
             data.senha = await criptografarSenha(data.senha)
             data.tipoUsuario="comum"
-            NovoUsuario(data)
+            console.log(data)
+            await NovoUsuario(data)
             res.status(200).json(data)
         }
     }catch(err){

@@ -13,7 +13,7 @@ const novoUsuarioSchemma = new Schema({
         type: String,
         required:true
     },
-    CPF:{
+    telefone:{
         type: String,
         required:true
     },

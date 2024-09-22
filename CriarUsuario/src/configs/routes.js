@@ -1,5 +1,5 @@
 const criarNovoUsuario = require('../routes/criarUsuario')
 
 module.exports = (app)=>{
-    app.use('/', criarNovoUsuario)
+    app.use('/api', criarNovoUsuario)
 }

@@ -3,12 +3,13 @@ const {criarUsuario} = require('../services/novo_usuario')
 exports.criarUsuarioController = async (req, res)=>{
     try{
         console.log("Entrou na rota")
-        const params = req.params
+        const params = req.body
+        
         let data = {
                 nome:params.nome,
                 email:params.email,
                 idade:params.idade,
-                CPF:params.cpf,
+                telefone:params.telefone,
                 senha:params.senha,
                 endereco:params.endereco
         }
