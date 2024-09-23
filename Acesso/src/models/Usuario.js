@@ -9,6 +9,15 @@ const novoUsuarioSchemma = new Schema({
         type: String,
         required:true
     },
+    idade:{
+        type: String,
+        required:true
+    },
+    telefone:{
+        type: String,
+        required:true
+    },
+
     senha:{
         type: String,
         required:true
@@ -20,6 +29,10 @@ const novoUsuarioSchemma = new Schema({
     _id:{
         type: String,
         required:true
+    },
+    hashTemporario:{
+        type: String,
+        required:false
     }
 })
 
