@@ -33,3 +33,14 @@ exports.salvarHash = async (idUsuario, hash)=>{
         console.error("Erro ao salvar o hash no BD",err)
     }
 }
+
+exports.buscadorDeId = async(_id)=>{
+    try{
+        const usuario = await Usuario.find({_id:_id})
+
+        return usuario
+        
+    }catch(err){
+        console.error("Erro ao salvar o hash no BD",err)
+    }
+}

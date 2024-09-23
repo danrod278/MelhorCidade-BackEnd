@@ -2,7 +2,6 @@ const {logar} = require('../services/login')
 
 exports.criarUsuarioController = async (req, res)=>{
     try{
-        
         const params = req.body
         let data = {
                 email:params.email,
