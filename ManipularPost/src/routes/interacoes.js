@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
-const {validarPost} = require("../controllers/validacao")
+const {validarPostController} = require("../controllers/validacao")
 
-router.post("/validacao", validarPost)
+router.post("/validacao", validarPostController)
 
 module.exports = router
