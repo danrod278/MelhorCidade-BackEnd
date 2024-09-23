@@ -20,7 +20,7 @@ exports.controllerNovoPost = async (req, res)=>{
                     StatusDenuncia:"Em aberto",
                     CoordenadasOcorrencia:form.coordenadas
                 }
-                CriarPost(postData)
+                CriarPost(postData, res)
             
         }else{
             res.status(401).json({mesage:'Necessário iniciar seção'})
