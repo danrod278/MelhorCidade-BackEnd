@@ -12,9 +12,14 @@ exports.verificarCadastros = async(data)=>{
     }
 }
 
-exports.buscaHash = async (hash) => {
+exports.buscaHash = async (hash, _id) => {
     try{
-        const consulta = await Usuario.find({hashTemporario:hash})
+        const consulta = await Usuario.find({
+            $and:[{_id:_id},
+                  {hashTemporario:hash}
+            ]
+        })
+        
         return consulta
     }catch(err){
         console.error('Erro ao buscar o hash no banco de dados: '+err)

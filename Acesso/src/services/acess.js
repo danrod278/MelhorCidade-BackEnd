@@ -1,20 +1,28 @@
 const {buscaHash, buscadorDeId} = require("../repositories/usuarios")
 
-exports.testaAcesso = async (req, res, hash)=>{
+exports.testaAcesso = async (req, res, hash, _id)=>{
     try{
-        const consultadoHAsh = await buscaHash(hash)
-        if(consultadoHAsh.length>0){
-            console.log("Acesso Liberado")
-            res.status(200).json({mensagem:"Acesso liberado", acess:true})
+        if(!hash || !_id){
+            console.error('cookie ou id inexistentes')
+            
+            res.json({mensagem:"cookie ou id inexistentes", acess:false})
         }else{
-            res.status(200).json({mensagem:"Necessario Autenticação", acess:false})
+            const consultadoHAsh = await buscaHash(hash, _id)
+            if(consultadoHAsh.length>0){
+                
+                res.json({mensagem:"Acesso liberado", acess:true})
+            }else{
+                console.error("Necessario Autenticação")
+                res.status(200).json({mensagem:"Necessario Autenticação", acess:false})
+            }
         }
+        
     }catch(err){
         console.error('Erro ao tentar verificar o hash'+err)
         res.json({mensagem:'Erro ao tentar verificar o hash', erro:err})
     }
 }
-
+   
 exports.vericadorDeId = async (req, res, _id)=>{
     try{
         const userFound = await buscadorDeId(_id)

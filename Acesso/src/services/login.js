@@ -46,6 +46,7 @@ exports.logar = async (data, res, req)=>{
         
     }catch(err){
         console.error('Houve um erro no processo de login '+err)
+        res.json({mensagem:"Houve um erro no processo de login", erro:err})
     }
 }
 
@@ -55,6 +56,7 @@ async function comparar(senha, hash) {
         return result
     }catch(err){
         console.error('Erro ao comparar o hash com a senha'+err)
+        res.json({mensagem:"Erro ao comparar o hash com a senha", erro:err})
     }
     
     
