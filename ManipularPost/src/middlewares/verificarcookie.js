@@ -14,7 +14,7 @@ exports.verificarCookie = async (req, res, next)=>{
                 next()
             }
             else{
-                res.json({mensagem:"Necessário um cookie para acessar esse serviço", acess:false})
+                res.json({mensagem:"Necessário um cookie ou um id válido para acessar esse serviço", acess:false})
             }
         }else{
             res.json({mensagem:"Id ou cookie inexistentes", acess:false})

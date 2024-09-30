@@ -1,15 +1,25 @@
 const {Post} = require("../models/Post")
 const {Usuario} = require('../models/Usuario')
+
 exports.Validar = async (id, CodigoDenuncia) =>{
     const buscaPost = await Post.find({CodigoDenuncia:CodigoDenuncia})
-    const adicionarValidacao = await Post.updateOne({CodigoDenuncia:CodigoDenuncia}, {$push:{Validacoes:{_Id_Usuario:id}}})
-    return adicionarValidacao
-}
-
-exports.desValidar = async (id, CodigoDenuncia) =>{
-    const adicionarValidacao = await Post.updateOne({CodigoDenuncia:CodigoDenuncia}, {$pull:{_Id_Usuario:id}})
-    return adicionarValidacao
-}
+    const buscaId = await Post.find({
+        Validacoes: {
+            $elemMatch: {
+                _Id_Usuario: id
+            }
+        },
+        CodigoDenuncia:CodigoDenuncia
+    });
+        console.log("validacao encontrada",buscaId)
+        if(buscaId.length>0){
+            const retirarValidacao = await Post.updateOne({CodigoDenuncia:CodigoDenuncia}, {$pull:{Validacoes:{_Id_Usuario:id}}})
+            return retirarValidacao
+        }else{
+            const adicionarValidacao = await Post.updateOne({CodigoDenuncia:CodigoDenuncia}, {$push:{Validacoes:{_Id_Usuario:id}}})
+            return adicionarValidacao
+        }
+    }
 
 exports.procurarValidacao = async (CodigoDenuncia, idUser) => {
     const result = await Post.find({CodigoDenuncia:CodigoDenuncia},

@@ -8,6 +8,7 @@ exports.testaAcesso = async (req, res, hash, _id)=>{
             res.json({mensagem:"cookie ou id inexistentes", acess:false})
         }else{
             const consultadoHAsh = await buscaHash(hash, _id)
+            
             if(consultadoHAsh.length>0){
                 
                 res.json({mensagem:"Acesso liberado", acess:true})

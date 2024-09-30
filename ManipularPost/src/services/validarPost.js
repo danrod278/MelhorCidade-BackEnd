@@ -1,4 +1,4 @@
-const {procurarValidacao, Validar, desValidar, Validar_ID} = require("../repositories/validacao")
+const {Validar, Validar_ID} = require("../repositories/validacao")
 
 exports.validarPost = async (req, res, id, CodigoDenuncia)=>{
     try{
@@ -8,7 +8,7 @@ exports.validarPost = async (req, res, id, CodigoDenuncia)=>{
             const resultValidacao = await Validar(id, CodigoDenuncia)
             //console.log(resultValidacao)
             if(resultValidacao.modifiedCount>0){
-                res.status(200).json({mesage:"Validação realizada com suceso"})
+                res.status(200).json({mesage:"Validação realizada com suceso", acess:true})
             }else{
                 res.json({mesage:"Erro na Validação. Verifique os campos"})
     
