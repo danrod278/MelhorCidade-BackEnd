@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
-const dotnvVariables = require("../../dotenvVariables")
+const {dotenvVariables} = require("../../dotenvVariables")
 
 mongoose.set('strictQuery', true);
-mongoose.connect(dotnvVariables.dotEnvVariables.ATLAS_URI_CONNECTION).then(()=>{
+mongoose.connect(dotenvVariables.ATLAS_URI_CONNECTION).then(()=>{
     console.log("Conectado ao bando de dados")
 }).catch((err)=>{
     console.error(err)

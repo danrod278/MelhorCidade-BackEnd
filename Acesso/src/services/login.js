@@ -32,7 +32,7 @@ exports.logar = async (data, res, req)=>{
                 const statusGravacao = await salvarHash(usuario[2], hash)
                 
                 if(statusGravacao){
-                    res.status(200).json({ acesso: true, mensage: "Acesso liberado", cookie: hash });                
+                    res.status(200).json({ acesso: true, mensage: "Acesso liberado", cookie: hash, _IdUser:usuario[2] });                
                 }else{
                     res.status(400).json({ acesso: false, mensage: "Erro ao gravar hash"});
                 }

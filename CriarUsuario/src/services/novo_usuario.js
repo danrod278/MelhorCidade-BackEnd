@@ -1,7 +1,7 @@
 const {verificarCadastros, NovoUsuario} = require('../repositories/usuarios')
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require("bcrypt")
-const {dotEnvVariables} = require("../../../dotenvVariables")
+const {dotEnvVariables} = require("../../dotenvVariables")
 
 exports.buscaCadastros = async (email)=>{
     try{
