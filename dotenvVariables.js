@@ -1,4 +1,4 @@
 exports.dotenvVariables = {
     PORT_NOVOPOST:3003,
-    ATLAS_URI_CONNECTION:"mongodb+srv://danrod278:qsc278279wdv@iris-vision.v0lmx6e.mongodb.net/"
+    ATLAS_URI_CONNECTION:""
 }
