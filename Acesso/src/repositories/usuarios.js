@@ -12,9 +12,20 @@ exports.verificarCadastros = async(data)=>{
     }
 }
 
+<<<<<<< HEAD
 exports.buscaHash = async (hash) => {
     try{
         const consulta = await Usuario.find({hashTemporario:hash})
+=======
+exports.buscaHash = async (hash, _id) => {
+    try{
+        const consulta = await Usuario.find({
+            $and:[{_id:_id},
+                  {hashTemporario:hash}
+            ]
+        })
+        
+>>>>>>> d3b1e142296eed6f513a65c5911cd0831e0241ce
         return consulta
     }catch(err){
         console.error('Erro ao buscar o hash no banco de dados: '+err)
@@ -32,4 +43,18 @@ exports.salvarHash = async (idUsuario, hash)=>{
     }catch(err){
         console.error("Erro ao salvar o hash no BD",err)
     }
+<<<<<<< HEAD
+=======
+}
+
+exports.buscadorDeId = async(_id)=>{
+    try{
+        const usuario = await Usuario.find({_id:_id})
+
+        return usuario
+        
+    }catch(err){
+        console.error("Erro ao salvar o hash no BD",err)
+    }
+>>>>>>> d3b1e142296eed6f513a65c5911cd0831e0241ce
 }
