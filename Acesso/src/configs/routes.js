@@ -5,3 +5,4 @@ module.exports = (app)=>{
     app.use('/api', login)
     app.use('/api', acess)
 }
+        
