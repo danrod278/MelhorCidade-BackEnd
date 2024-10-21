@@ -9,10 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-<<<<<<< HEAD
-=======
     "axios": "^1.7.7",
->>>>>>> d3b1e142296eed6f513a65c5911cd0831e0241ce
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
     "cookie-parser": "^1.4.6",

@@ -12,7 +12,6 @@ exports.verificarCadastros = async(data)=>{
     }
 }
 
-
 exports.buscaHash = async (hash, _id) => {
     try{
         const consulta = await Usuario.find({

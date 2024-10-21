@@ -26,7 +26,6 @@ exports.logar = async (data, res, req)=>{
             
             if (testCompare){   
                 const hash = uuidv4();
-
                 res.cookie("hashTemporario", hash, { maxAge: 90000 })
                 res.cookie("IDUsuario", usuario[2], {maxAge: 90000})
                 console.log(req.cookies.hashTemporario)
@@ -48,7 +47,6 @@ exports.logar = async (data, res, req)=>{
     }catch(err){
         console.error('Houve um erro no processo de login '+err)
         res.json({mensagem:"Houve um erro no processo de login", erro:err})
-
     }
 }
 
@@ -59,7 +57,9 @@ async function comparar(senha, hash) {
     }catch(err){
         console.error('Erro ao comparar o hash com a senha'+err)
 
+
         res.json({mensagem:"Erro ao comparar o hash com a senha", erro:err})
+
 
     }
     
