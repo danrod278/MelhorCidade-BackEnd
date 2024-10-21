@@ -3,6 +3,7 @@ const {buscaHash, buscadorDeId} = require("../repositories/usuarios")
 exports.testaAcesso = async (req, res, hash, _id)=>{
     try{
         if(!hash || !_id){
+            console.log(hash, _id)
             console.error('cookie ou id inexistentes')
             
             res.json({mensagem:"cookie ou id inexistentes", acess:false})

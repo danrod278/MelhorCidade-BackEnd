@@ -4,8 +4,9 @@ exports.verificarCookie = async (req, res, next)=>{
     console.log("Entrou no middleware")
     try{
         const form = req.body
-        if(form._id && form.cookie){
-            const permicao = await axios.post("http://localhost:3000/api/acess", {cookie:form.cookie, _id:form._id}, {
+        console.log(req.body)
+        if(form._idUser && form.cookie){
+            const permicao = await axios.post("http://localhost:3000/api/acess", {cookie:form.cookie, _idUser:form._idUser}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }})

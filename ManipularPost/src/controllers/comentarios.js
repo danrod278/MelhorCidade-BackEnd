@@ -7,9 +7,12 @@ exports.comentarController = async (req, res)=>{
         if(idExistente.data.acesso){
             salvarComentario(_idUser, conteudo, CodigoDenuncia, res)
         }
+        else{
+            res.json({mensagem:"esse id não existe", acess:false})
+        }
     }
     catch (err){
-        console.error("Erro ao fazer comentátio "+err)
+        console.error("Erro ao fazer comentário "+err)
         res.json({mensagem:"Erro ao fazer comentário", err:err})
     }
 }
