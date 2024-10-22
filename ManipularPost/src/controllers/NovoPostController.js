@@ -23,3 +23,16 @@ exports.controllerNovoPost = async (req, res)=>{
     }
 
 }
+
+exports.carregarDenunciasController = async (req, res)=>{
+    try{
+        const CodigoDenuncia = req.body.CodigoDenuncia
+        if(CodigoDenuncia){
+
+        }
+        return res.json({mensagem:"É necessáro um código de denuncia válido"})
+    }catch(err){
+        console.error("Erro ao carregar denuncia para o usuário", err)
+        res.json({mensagem:"Erro ao carregar denuncia para o usuário", erro:err})
+    }
+}
