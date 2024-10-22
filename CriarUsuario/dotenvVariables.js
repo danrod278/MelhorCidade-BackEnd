@@ -1,5 +1,6 @@
 exports.dotEnvVariables = {
+    SECRET_SESSION:"",
     ATLAS_URI_CONNECTION:"",
-    CRIARUSUARIO_PORT:3001,
+    CRIARUSUARIO_PORT:3002,
     SALTROUNDS:10
 }

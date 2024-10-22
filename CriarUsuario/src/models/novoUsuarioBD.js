@@ -17,7 +17,6 @@ const novoUsuarioSchemma = new Schema({
         type: String,
         required:true
     },
-
     senha:{
         type: String,
         required:true
@@ -26,13 +25,13 @@ const novoUsuarioSchemma = new Schema({
         type: String,
         required:true
     },
-    _id:{
+    endereco:{
         type: String,
         required:true
     },
-    hashTemporario:{
+    _id:{
         type: String,
-        required:false
+        required:true
     }
 })
 
