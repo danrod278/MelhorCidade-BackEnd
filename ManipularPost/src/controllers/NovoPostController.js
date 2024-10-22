@@ -4,7 +4,6 @@ const { v4: uuidv4 } = require('uuid');
 exports.controllerNovoPost = async (req, res)=>{
     try{
         const form = req.body
-        console.log(req.files)
         const postData = {
             Descricao:{
                 Categoria:form.categoria,
