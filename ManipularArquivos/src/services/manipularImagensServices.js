@@ -2,7 +2,7 @@ const {v4: uuidv4} = require("uuid")
 const path = require("path")
 const fs = require("fs")
 
-exports.salvarImagem = async (req, res, arrayImagens)=>{
+exports.salvarImagem = async (res, arrayImagens)=>{
     try{
         let arrayCaminhos = []
         let arrayErros = []
@@ -38,14 +38,46 @@ exports.salvarImagem = async (req, res, arrayImagens)=>{
     }
 }
 
+exports.lerImagens = async(res, arrayCaminhos)=>{
+    try {
+        let arrayBuffers = []
+        let arrayCaminhosErros = []
+        for (i=0;i<arrayCaminhos.length;i++){
+            try {
+                var pathName = path.join(__dirname, "..","imagens", arrayCaminhos[i])
+                var buffer = await readFileAsync(pathName)
+                arrayBuffers.push(buffer)                
+            } catch (error) {
+                arrayCaminhosErros.push(arrayCaminhos[i])
+            }            
+        }
+        res.json({arrayBuffers:arrayBuffers, arrayCaminhosErros:arrayCaminhosErros, acess:true})
+    } catch (err) {
+        console.error("Erro ao ler array de imagens", err)
+        res.json({mensagem:"Erro ao ler array de imagens", erro:err})
+    }
+}
+
 async function writeFileAsync (filePath, buffer){
     return new Promise((resolve, reject)=>{
         fs.writeFile(filePath, buffer, (err, data)=>{
             if(err){
-                console.error('Error while writing a file '+err)
+                console.error('Erro ao escrever arquivo '+err)
                 reject(err)
             }
             resolve(true)
+        })
+    })
+}
+
+async function readFileAsync(caminho) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(caminho, (err, data)=>{
+            if(err){
+                console.error("Erro ao ler arquivo", err)
+                reject(err)
+            }
+            resolve(data)
         })
     })
 }

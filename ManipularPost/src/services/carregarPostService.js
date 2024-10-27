@@ -19,10 +19,10 @@ exports.carregarDenunciaService = async(CodigoDenuncia, res)=>{
             const Usuario = await buscarUsuarioDB(denuncia.Descricao.ID_usuario)
             denuncia.nome = Usuario.nome
             
-            /*falta pegar o nome, e a foto de perfil do usuario. as funções repositório que fazem isso ja estão prontas; falta criar as rotas que vão buscar a imagem em manipularArquivos também falfa inserir caminho da foto de perfil no model de usuario*/
+            /*falta pegar o nome, e a foto de perfil do usuario. as funções repositório que fazem isso ja estão prontas; falta criar as rotas que vão buscar a imagem em manipularArquivos também falta inserir caminho da foto de perfil no model de usuario*/
 
         }else{
-            return res.json({mensagem:"Essa denúncia não existe", acess:false})
+            return res.json({mensagem:"É necessáro um código de denuncia válido", acess:false})
         }
     }catch(err){
         console.error("Erro ao tentar ler as denúncias", err)

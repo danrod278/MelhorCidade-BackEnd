@@ -1,7 +1,8 @@
 const express = require("express")
 const router = express.Router()
-const { salvarImagemController } = require('../controller/salvarImagemControllers')
+const { salvarImagemController, lerImagensController } = require('../controller/manipularImagensControllers')
 
 router.post("/salvarImagem", salvarImagemController)
+router.post("/lerImagens", lerImagensController)
 
 module.exports = router

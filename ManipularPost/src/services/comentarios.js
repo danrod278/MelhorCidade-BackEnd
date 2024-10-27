@@ -14,10 +14,11 @@ exports.salvarComentario = async (_idUser, conteudo, CodigoDenuncia, res)=>{
                 console.error("Erro ao tentar salvar comentario")
                 res.json({mensagem:"Erro ao fazer comentario", acess:false})
             }
+        }else{
+            res.json({mensagem:"Esse post não existe", acess:false})
         }
     }catch(err){
         console.error("Erro ao tentar salvar comentario"+err)
         res.json({mensagem:"Erro ao tentar salvar comentario", erro:err})
     }
 }
-

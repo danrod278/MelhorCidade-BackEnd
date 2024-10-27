@@ -1,4 +1,5 @@
 const {CriarPost} = require('../services/criarPost')
+const {carregarDenunciaService} = require("../services/carregarPostService")
 const { v4: uuidv4 } = require('uuid');
 
 exports.controllerNovoPost = async (req, res)=>{
@@ -28,9 +29,9 @@ exports.carregarDenunciasController = async (req, res)=>{
     try{
         const CodigoDenuncia = req.body.CodigoDenuncia
         if(CodigoDenuncia){
-
+            carregarDenunciaService(CodigoDenuncia)
         }
-        return res.json({mensagem:"É necessáro um código de denuncia válido"})
+        return res.json({mensagem:"É necessáro um código de denuncia válido", acess:false})
     }catch(err){
         console.error("Erro ao carregar denuncia para o usuário", err)
         res.json({mensagem:"Erro ao carregar denuncia para o usuário", erro:err})
