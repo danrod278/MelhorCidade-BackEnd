@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
-const {controllerNovoPost} = require("../controllers/NovoPostController")
+const {controllerNovoPost, carregarDenunciasController} = require("../controllers/NovoPostController")
 
 router.post("/novaDenuncia", controllerNovoPost)
-router.post("/carregarPost", )
+router.post("/carregarPost", carregarDenunciasController)
 module.exports = router

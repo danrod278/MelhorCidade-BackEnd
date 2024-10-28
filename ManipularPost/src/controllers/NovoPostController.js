@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 exports.controllerNovoPost = async (req, res)=>{
     try{
         const form = req.body
+        const {cookie, _idUser} = req.body
         const postData = {
             Descricao:{
                 Categoria:form.categoria,
@@ -17,7 +18,7 @@ exports.controllerNovoPost = async (req, res)=>{
             StatusDenuncia:"Em aberto",
             CoordenadasOcorrencia:form.CoordenadasOcorrencia
         }
-        CriarPost(postData, res, req)
+        CriarPost(postData, cookie, _idUser, res, req)
 
     }catch(err){
         res.status(401).json('Erro ao Criar novo post ', err)
@@ -27,11 +28,12 @@ exports.controllerNovoPost = async (req, res)=>{
 
 exports.carregarDenunciasController = async (req, res)=>{
     try{
-        const CodigoDenuncia = req.body.CodigoDenuncia
+        const {CodigoDenuncia, _idUser, cookie} = req.body
         if(CodigoDenuncia){
-            carregarDenunciaService(CodigoDenuncia)
+            carregarDenunciaService(CodigoDenuncia, _idUser, cookie, res)
+        }else{
+            res.json({mensagem:"É necessáro um código de denuncia válido", acess:false})
         }
-        return res.json({mensagem:"É necessáro um código de denuncia válido", acess:false})
     }catch(err){
         console.error("Erro ao carregar denuncia para o usuário", err)
         res.json({mensagem:"Erro ao carregar denuncia para o usuário", erro:err})

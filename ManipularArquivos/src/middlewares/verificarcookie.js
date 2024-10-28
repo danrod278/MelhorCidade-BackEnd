@@ -10,7 +10,7 @@ exports.verificarCookie = async (req, res, next)=>{
                 headers: {
                     'Content-Type': 'application/json'
                 }})
-            console.log(permicao.data)
+            
             if(permicao.data.acess){
                 next()
             }

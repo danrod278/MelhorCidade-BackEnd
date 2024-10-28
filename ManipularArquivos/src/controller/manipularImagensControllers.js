@@ -2,7 +2,7 @@ const {salvarImagem, lerImagens} = require("../services/manipularImagensServices
 
 exports.salvarImagemController = async (req, res)=>{
     try{
-        console.log(req.body)
+       
         if(req.body.files.length>0 && req.body.files.length<=3){
             const files = req.body.files
             salvarImagem(res, files)
@@ -18,7 +18,6 @@ exports.salvarImagemController = async (req, res)=>{
 exports.lerImagensController = async (req, res)=>{
     try {
         const files = req.body.files
-        console.log(files)
         if(files.length>0){
             lerImagens(res, files)
         }else{

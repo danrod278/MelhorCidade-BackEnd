@@ -7,3 +7,4 @@ mongoose.connect(dotenvVariables.ATLAS_URI_CONNECTION).then(()=>{
 }).catch((err)=>{
     console.error(err)
 })
+

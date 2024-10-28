@@ -7,7 +7,6 @@ exports.salvarImagem = async (res, arrayImagens)=>{
         let arrayCaminhos = []
         let arrayErros = []
         for(const element of arrayImagens){
-            
             var mimetype = element.mimetype
             mimetype = mimetype.split('/')
             var typeImage = element.originalname
@@ -20,20 +19,20 @@ exports.salvarImagem = async (res, arrayImagens)=>{
             else{
                 const pathName = uuidv4()
                 const filePath = path.join(__dirname, "..", "imagens", `${pathName}.${typeImage[1]}`)
-                console.log(element.buffer.data)
                 const bufferData = Buffer.from(element.buffer.data);
                 const statusWriteFileAsync = await writeFileAsync(filePath, bufferData)
                 
                 if(statusWriteFileAsync){
                     arrayCaminhos.push({Caminho:filePath})
                 }else{
+                    arrayErros.push(element.originalname)
                     console.error("Não foi possivel salvar as images")
                 }
             }   
         }
-        res.json({arrayCaminhos, arrayErros})
+        res.json({arrayCaminhos, arrayErros, acess:true})
     }catch(err){
-        console.log("Erro ao salvar a imagem "+err)
+        console.error("Erro ao salvar a imagem "+err)
         res.json({mensagem:"Erro ao salvar a imagem", erro:err, acess:false})
     }
 }
@@ -44,13 +43,14 @@ exports.lerImagens = async(res, arrayCaminhos)=>{
         let arrayCaminhosErros = []
         for (i=0;i<arrayCaminhos.length;i++){
             try {
-                var pathName = path.join(__dirname, "..","imagens", arrayCaminhos[i])
-                var buffer = await readFileAsync(pathName)
-                arrayBuffers.push(buffer)                
+                var buffer = await readFileAsync(arrayCaminhos[i].Caminho)
+                arrayBuffers.push(buffer)  
+
             } catch (error) {
                 arrayCaminhosErros.push(arrayCaminhos[i])
             }            
         }
+        console.log(arrayBuffers)
         res.json({arrayBuffers:arrayBuffers, arrayCaminhosErros:arrayCaminhosErros, acess:true})
     } catch (err) {
         console.error("Erro ao ler array de imagens", err)
