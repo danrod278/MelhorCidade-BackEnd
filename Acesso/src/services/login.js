@@ -31,16 +31,17 @@ exports.logar = async (data, res, req)=>{
                 console.log(req.cookies.hashTemporario)
                 const statusGravacao = await salvarHash(usuario[2], hash)
                 
+                console.log({acesso: true, mensagem: "Acesso liberado", cookie: hash, id:usuario[2] })
                 if(statusGravacao){
                     res.status(200).json({ acesso: true, mensagem: "Acesso liberado", cookie: hash, id:usuario[2] });                
                 }else{
-                    res.status(400).json({ acesso: false, mensagem: "Erro ao gravar hash"});
+                    res.json({ acesso: false, mensagem: "Erro ao gravar hash"});
                 }
             }else{
-                res.status(401).json({acesso:false, mensagem:"Dados incorretos"})
+                res.json({acesso:false, mensagem:"Dados incorretos"})
             }
         }else{
-            res.status(401).json({acesso:false, mensagem:"Dados incorretos"})
+            res.json({acesso:false, mensagem:"Dados incorretos"})
         }
         
         
