@@ -23,7 +23,7 @@ exports.criarUsuario = async (data, res)=>{
         
         const permicao = await this.buscaCadastros(data.email)
         if(!permicao){
-            res.status(400).json({error:"Essa conta ja existe"})
+            res.json({error:"Essa conta já existe"})
         }else{
             data._id = uuidv4()
             data.senha = await criptografarSenha(data.senha)
@@ -33,7 +33,7 @@ exports.criarUsuario = async (data, res)=>{
             if(salvoStatus){
                 res.status(200).json({dados:data, mensage:"Conta criada com sucesso"})
             }else{
-                res.status(400).json({mensage:"Erro ao salvar no banco de dados (Possível campo faltando)", status:false})
+                res.json({mensagem:"Erro ao salvar no banco de dados (Possível campo faltando)", status:false})
             }
         }
     }catch(err){
