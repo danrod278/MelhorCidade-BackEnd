@@ -11,11 +11,11 @@ const novoUsuarioSchemma = new Schema({
     },
     idade:{
         type: String,
-        required:true
+        required:false
     },
     telefone:{
         type: String,
-        required:true
+        required:false
     },
     senha:{
         type: String,
