@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "./Acesso/index.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "./Acesso//index.js" }
+  ]
+}
