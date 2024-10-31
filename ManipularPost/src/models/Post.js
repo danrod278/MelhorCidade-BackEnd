@@ -64,8 +64,7 @@ const novoPostSchema = new Schema({
             required:true
         }
     }]
-})
+}, {timestamps:true})
 const Post = mongoose.model("Post", novoPostSchema)
-Post.deleteMany({});
 
 module.exports = {Post}

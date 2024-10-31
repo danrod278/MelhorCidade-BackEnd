@@ -1,6 +1,8 @@
+require('dotenv').config()
+
 exports.dotEnvVariables = {
-    SECRET_SESSION:"",
-    ATLAS_URI_CONNECTION:"mongodb+srv://danrod278:qsc278279wdv@iris-vision.v0lmx6e.mongodb.net/?retryWrites=true&w=majority&appName=Iris-vision",
-    ACESSO_PORT:3000,
-    SALTROUNDS:10
+    
+    ATLAS_URI_CONNECTION:process.env.ATLAS_URI_CONNECTION,
+    ACESSO_PORT:process.env.ACESSO_PORT,
+    SALTROUNDS:process.env.SALTROUNDS
 }

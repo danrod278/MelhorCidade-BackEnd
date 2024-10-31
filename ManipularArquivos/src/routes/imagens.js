@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { salvarImagemController, lerImagensController } = require('../controller/manipularImagensControllers')
+const { salvarImagemController} = require('../controller/manipularImagensControllers')
 
 router.post("/salvarImagem", salvarImagemController)
 

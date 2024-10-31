@@ -1,5 +1,6 @@
+require("dotenv").config()
 
 exports.dotenvVariables = {
-    PORT_NOVOPOST:3001,
-    ATLAS_URI_CONNECTION:"mongodb+srv://danrod278:qsc278279wdv@iris-vision.v0lmx6e.mongodb.net/?retryWrites=true&w=majority&appName=Iris-vision"
+    PORT_NOVOPOST:process.env.PORT_NOVOPOST,
+    ATLAS_URI_CONNECTION:process.env.ATLAS_URI_CONNECTION
 }
