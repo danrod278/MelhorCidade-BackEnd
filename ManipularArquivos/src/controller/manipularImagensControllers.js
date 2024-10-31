@@ -1,4 +1,4 @@
-const {salvarImagem, lerImagens} = require("../services/manipularImagensServices")
+const {salvarImagem} = require("../services/manipularImagensServices")
 
 exports.salvarImagemController = async (req, res)=>{
     try{
@@ -15,15 +15,3 @@ exports.salvarImagemController = async (req, res)=>{
     }
 }
 
-exports.lerImagensController = async (req, res)=>{
-    try {
-        const files = req.body.files
-        if(files.length>0){
-            lerImagens(res, files)
-        }else{
-            res.json({mensagem:"É necessário ao menos um caminho", acess:false})
-        }
-    } catch (err) {
-        res.json({mensagem:"Erro ao ler a imagem", erro:err, acess:false})
-    }
-}
