@@ -14,7 +14,6 @@ exports.NovoUsuario = async (data)=>{
 exports.verificarCadastros = async(email)=>{
     try{
         const emailQuery = await Usuario.find({email:email})
-        console.log(emailQuery)
         return emailQuery
 
     }catch(err){

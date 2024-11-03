@@ -9,7 +9,6 @@ exports.buscaCadastros = async (email)=>{
         const testExistencia = await verificarCadastros(email)
         if(testExistencia.length>0){
             return false
-            
         }else{
             return true
         }
@@ -28,12 +27,12 @@ exports.criarUsuario = async (data, res)=>{
             data._id = uuidv4()
             data.senha = await criptografarSenha(data.senha)
             data.tipoUsuario="comum"
-            console.log(data)
+            //console.log(data)
             const salvoStatus = await NovoUsuario(data)
             if(salvoStatus){
-                res.status(200).json({dados:data, mensage:"Conta criada com sucesso"})
+                res.json({mensagem:"Conta criada com sucesso", acess:true})
             }else{
-                res.json({mensagem:"Erro ao salvar no banco de dados (Possível campo faltando)", status:false})
+                res.json({mensagem:"Erro ao salvar no banco de dados (Possível campo faltando)", acess:false})
             }
         }
     }catch(err){
@@ -43,7 +42,8 @@ exports.criarUsuario = async (data, res)=>{
 }
 
 async function criptografarSenha(senha) {
-    const hash = await bcrypt.hash(senha, dotEnvVariables.SALTROUNDS)
+    const saltround = parseInt(dotEnvVariables.SALTROUNDS)
+    const hash = await bcrypt.hash(senha, saltround)
     return hash 
 }
 
