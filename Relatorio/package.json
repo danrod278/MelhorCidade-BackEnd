@@ -1,0 +1,20 @@
+{
+  "name": "nova-pasta",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run start:acesso\" \"npm run start:criarusuario\" \"npm run start:manipulararquivos\" \"npm run start:manipularpost\" ",
+    "start:acesso": "cd Acesso && npm i && node index.js",
+    "start:criarusuario": "cd CriarUsuario && npm i &&node index.js",
+    "start:manipulararquivos":"cd ManipularArquivos && npm i && node index.js",
+    "start:manipularpost":"cd ManipularPost && npm i && node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
