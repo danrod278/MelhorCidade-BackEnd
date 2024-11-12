@@ -6,7 +6,7 @@ exports.CriarPost = async (data, cookie, _idUser, res, req) =>{
         const files = req.files
         
         if(files.length>0 && files.length<=3){
-            const manda_files_para_axios = await axios.post('http://localhost:3001/api/salvarImagem', {files, _idUser:_idUser, cookie:cookie})
+            const manda_files_para_axios = await axios.post('http://localhost:3003/api/salvarImagem', {files, _idUser:_idUser, cookie:cookie})
             console.log(manda_files_para_axios.data)
             if(manda_files_para_axios.data.acess){
                 
