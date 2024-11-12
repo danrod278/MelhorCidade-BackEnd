@@ -1,4 +1,8 @@
+
+require('dotenv').config()
+
 exports.dotenvVariables = {
-    PORT_NOVOPOST:3003,
-    ATLAS_URI_CONNECTION:""
+    PORT_NOVOPOST:process.env.PORT_NOVOPOST,
+    ATLAS_URI_CONNECTION:process.env.ATLAS_URI_CONNECTION
+
 }
