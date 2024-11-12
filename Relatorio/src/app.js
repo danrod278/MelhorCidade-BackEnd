@@ -1,10 +1,10 @@
 'use strict'
 
-const app = require('./config/basic')
+const app = require('./configs/basic')
 
-require('./config/database')
-require('./config/middlewares')
-require('./config/routes')(app)
-require('./config/models')
+require('./configs/database')
+require('./configs/middlewares')
+require('./configs/routes')
+require('./configs/models')
 
 module.exports = app
