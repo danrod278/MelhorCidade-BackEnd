@@ -8,7 +8,6 @@ exports.carregarDenunciaService = async(CodigoDenuncia, _idUser, cookie, res)=>{
         if(denunciaDB.length>0){
             let arrayCaminhos = denuncia.Descricao.Imagens            
             var buffer = await axios.post('http://localhost:3003/api/lerImagens', {_idUser:_idUser, cookie:cookie, files:arrayCaminhos})
-            
             var arrayBuffers = buffer.data.arrayBuffers
             denuncia.Descricao={...denuncia.Descricao, Imagens:arrayBuffers}
             

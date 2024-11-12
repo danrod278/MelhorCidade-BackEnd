@@ -13,7 +13,6 @@ exports.salvarImagem = async (res, arrayImagens, formato)=>{
         const bucketName = 'Imagens'
         const arrayCaminhos = []
         const arrayErros = []
-
         if(formato=="buffer"){
                 for(var element of arrayImagens){
                 

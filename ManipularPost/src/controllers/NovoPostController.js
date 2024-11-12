@@ -6,13 +6,14 @@ exports.controllerNovoPost = async (req, res)=>{
     try{
         const form = req.body
         const {cookie, _idUser} = req.body
+        console.log(form);
+        
         const postData = {
             Descricao:{
                 Categoria:form.categoria,
                 Referencia:form.referencia,
                 Ocorrencia:form.ocorrencia,
                 ID_usuario:form._idUser,
-                
             },
             CodigoDenuncia:uuidv4(),
             StatusDenuncia:"Em aberto",
