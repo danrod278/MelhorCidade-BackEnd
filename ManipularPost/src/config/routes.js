@@ -4,10 +4,12 @@ const comentar = require("../routes/comentarios")
 const {verificarCookie} = require("../middlewares/verificarcookie")
 const upload = require("../middlewares/multer")
 const errosMulter = require("../middlewares/errorMulter")
-
+const {verificarADM} = require("../middlewares/verificarADM")
+const mudarStatusDenuncia = require("../routes/mudarStatusDenuncia")
 
 module.exports = (app)=>{
     app.use('/api', upload.any(), errosMulter, verificarCookie, novoPostRouter)
     app.use('/api', verificarCookie, interacoes)
     app.use('/api', verificarCookie, comentar)
+    app.use("/api", verificarCookie, verificarADM, mudarStatusDenuncia)
 }
