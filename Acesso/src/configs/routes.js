@@ -14,6 +14,6 @@ const upload = multer({
 
 
 module.exports = (app)=>{
-    app.use('/api', login)
+    app.use('/api', upload.any(), login)
     app.use('/api', acess)
 }

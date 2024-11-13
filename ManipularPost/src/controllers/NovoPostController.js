@@ -17,9 +17,9 @@ exports.controllerNovoPost = async (req, res)=>{
             },
             CodigoDenuncia:uuidv4(),
             StatusDenuncia:"Em aberto",
-            CoordenadasOcorrencia:form.CoordenadasOcorrencia
+            CoordenadasOcorrencia:{type:"Point", coordenadas:form.CoordenadasOcorrencia}
         }
-        CriarPost(postData, cookie, _idUser, res, req)
+        CriarPost(postData, cookie, _idUser,form.formato, res, req)
 
     }catch(err){
         res.status(401).json('Erro ao Criar novo post ', err)

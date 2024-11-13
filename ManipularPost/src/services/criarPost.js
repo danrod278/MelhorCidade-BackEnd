@@ -1,17 +1,25 @@
 const {SalvarPostBD} = require("../repositories/CriarPost")
 const axios = require("axios")
 
-exports.CriarPost = async (data, cookie, _idUser, res, req) =>{
+exports.CriarPost = async (data, cookie, _idUser, formato, res, req) =>{
     try{
-        const files = req.files
+
+        if (formato=="buffer"){
+            const files = req.files   
+        }else if(formato=="base64"){
+            const files = req.body.files
+        }else{
+            return res.json({mensagem:"Formato de imagem inválido", acess:false})
+        }
         
         if(files.length>0 && files.length<=3){
-            const manda_files_para_axios = await axios.post('http://localhost:3003/api/salvarImagem', {files, _idUser:_idUser, cookie:cookie})
+            const manda_files_para_axios = await axios.post('http://localhost:3003/api/salvarImagem', {files:files, _idUser:_idUser, cookie:cookie, formato:formato})
+
             console.log(manda_files_para_axios.data)
             if(manda_files_para_axios.data.acess){
                 
                 if(manda_files_para_axios.data.arrayCaminhos.length==0){
-                    res.json({status:false, mesage:"É necessário ao menos uma imagem para fazer a denúncia", acess:false})
+                    return res.json({status:false, mesage:"É necessário ao menos uma imagem para fazer a denúncia", acess:false})
                 }
                 let arrayImagens = []
                 for(const element of manda_files_para_axios.data.arrayCaminhos){

@@ -35,13 +35,14 @@ const novoPostSchema = new Schema({
         required:true
     },
     CoordenadasOcorrencia:{
-        latitude:{
-            type:Number,
-            required:false
+        type: {
+            type: String,
+            enum: ['Point'], // Definindo como 'Point' para uso geoespacial
+            required: true
         },
-        longitude:{
-            type:Number,
-            required:false
+        coordenadas: {
+            type: [Number], // Array com [longitude, latitude]
+            required: true
         }
     },
     Validacoes:[{
