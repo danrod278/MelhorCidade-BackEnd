@@ -1,5 +1,6 @@
 const {Post} = require("../models/Post")
 const {Usuario} = require("../models/Usuario")
+const { post } = require("../routes/novoPost")
 
 exports.pegarDenunciaDB = async (CodigoDenuncia)=>{
     try{
@@ -17,4 +18,13 @@ exports.buscarUsuarioDB = async(_idUser)=>{
     }catch(err){
         return err
     } 
+}
+
+exports.carregarDenunciasPorTurn = async(turn)=>{
+    try {
+        const denuncias = await Post.find().sort({createdAt:-1}).skip(5*turn).limit(5)
+        return denuncias
+    } catch (error) {
+        return err
+    }
 }

@@ -7,7 +7,7 @@ exports.validarPost = async (req, res, id, CodigoDenuncia)=>{
             const resultValidacao = await Validar(id, CodigoDenuncia)
             console.log(resultValidacao)
             if(resultValidacao.modifiedCount>0){
-                res.json({mesage:"Validação realizada com suceso", acess:true})
+                res.json({mensagem:"Validação realizada com suceso", acess:true})
             }else{
                 res.json({mensagem:"Erro na Validação. Verifique os campos. possível erro, codigo de denuncia inválido", acess:false})
             }

@@ -1,5 +1,6 @@
 const {CriarPost} = require('../services/criarPost')
 const {carregarDenunciaService} = require("../services/carregarPostService")
+const {carregarPostsPorDataService} = require("../services/carregarPostsPorDataService")
 const { v4: uuidv4 } = require('uuid');
 
 exports.controllerNovoPost = async (req, res)=>{
@@ -29,6 +30,7 @@ exports.controllerNovoPost = async (req, res)=>{
 exports.carregarDenunciasController = async (req, res)=>{
     try{
         const {CodigoDenuncia, _idUser, cookie} = req.body
+
         if(CodigoDenuncia){
             carregarDenunciaService(CodigoDenuncia, _idUser, cookie, res)
         }else{
@@ -36,8 +38,21 @@ exports.carregarDenunciasController = async (req, res)=>{
         }
     }catch(err){
         console.error("Erro ao carregar denuncia para o usuário", err)
-        res.json({mensagem:"Erro ao carregar denuncia para o usuário", erro:err})
+        res.json({mensagem:"Erro ao carregar denuncia para o usuário", erro:err, acess:false})
     }
 }
 
-
+exports.carregarPostsPorDataController = async(req, res)=>{
+    try{
+        const {turn} = req.body
+        if(turn>=0){
+            carregarPostsPorDataService(turn, res)
+        }else{
+            console.error("É necessário um turn maior ou igual a 0");
+            res.json({mensagem:"É necessário um turn maior ou igual a 0", acess:false})
+        }
+    }catch(err){
+        console.error('Erro ao receber o formulário de carregarPostsPorData',err)
+        res.json({mensagem:"Erro ao receber o formulário de carregarPostsPorData", err, acess:false})
+    }
+}
