@@ -7,9 +7,9 @@ const novoPostSchema = new Schema({
             type:String,
             required:true
         },
-        Referencia:{
+        Endereco:{
             type: String,
-            required:false
+            required:true
         },
         Ocorrencia:{
             type:String,

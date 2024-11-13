@@ -1,11 +1,16 @@
-const {carregarDenunciasPorTurn} = require("../repositories/carregarDenuncia")
+const {carregarDenunciasPorTurn, buscarUsuarioDB} = require("../repositories/carregarDenuncia")
 
 exports.carregarPostsPorDataService = async(turn, res)=>{
     try{
 
-        const denuncias = await carregarDenunciasPorTurn(turn)
+        var denuncias = await carregarDenunciasPorTurn(turn)
         if(denuncias){
-            console.log(denuncias)
+            for(i=0;i<denuncias.length;i++){
+                const Usuario = await buscarUsuarioDB(denuncias[i].Descricao.ID_usuario)
+                denuncias[i].nome = Usuario[0].nome
+            }
+            console.log(denuncias[0])
+            
             res.json({denuncias, acess:true})
         }else{
             console.error("Erro ao tentar buscar as ultimas denúncias",err)

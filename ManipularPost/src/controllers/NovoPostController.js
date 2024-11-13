@@ -12,7 +12,7 @@ exports.controllerNovoPost = async (req, res)=>{
         const postData = {
             Descricao:{
                 Categoria:form.categoria,
-                Referencia:form.referencia,
+                Endereco:form.endereco,
                 Ocorrencia:form.ocorrencia,
                 ID_usuario:form._idUser,
             },
