@@ -1,4 +1,5 @@
 const {SalvarPostBD} = require("../repositories/CriarPost")
+const {buscarUsuarioDB} = require("../repositories/carregarDenuncia")
 const axios = require("axios")
 
 exports.CriarPost = async (data, cookie, _idUser, formato, res, req) =>{
@@ -15,7 +16,6 @@ exports.CriarPost = async (data, cookie, _idUser, formato, res, req) =>{
         if(files.length>0 && files.length<=3){
             const manda_files_para_axios = await axios.post('http://localhost:3002/api/salvarImagem', {files:files, _idUser:_idUser, cookie:cookie, formato:formato})
 
-            console.log(manda_files_para_axios.data)
             if(manda_files_para_axios.data.acess){
                 
                 if(manda_files_para_axios.data.arrayCaminhos.length==0){
@@ -25,11 +25,12 @@ exports.CriarPost = async (data, cookie, _idUser, formato, res, req) =>{
                 for(const element of manda_files_para_axios.data.arrayCaminhos){
                     arrayImagens.push({Caminho:element.publicUrl})
                 }
-                
-                console.log(arrayImagens)
+                const Usuario = await buscarUsuarioDB(_idUser)
+                data.Descricao.Nome = Usuario[0].nome
                 data.Descricao.Imagens=arrayImagens
+                console.log(data)
                 const statusRegistroSalvo = await SalvarPostBD(data)
-                console.log(statusRegistroSalvo)
+
                 if(statusRegistroSalvo){
                     res.json({acess:true, mensagem:"Denuncia realizada com sucesso", erros:manda_files_para_axios.data.arrayErros})
                 }else{

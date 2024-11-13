@@ -3,6 +3,10 @@ const Schema = mongoose.Schema
 
 const novoPostSchema = new Schema({
     Descricao:{
+        Nome:{
+            type:String,
+            required:true
+        },
         Categoria:{
             type:String,
             required:true

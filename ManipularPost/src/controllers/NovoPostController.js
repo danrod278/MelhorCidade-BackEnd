@@ -7,7 +7,7 @@ exports.controllerNovoPost = async (req, res)=>{
     try{
         const form = req.body
         const {cookie, _idUser} = req.body
-        console.log(form);
+        
         
         const postData = {
             Descricao:{

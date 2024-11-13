@@ -5,10 +5,6 @@ exports.carregarPostsPorDataService = async(turn, res)=>{
 
         var denuncias = await carregarDenunciasPorTurn(turn)
         if(denuncias){
-            for(i=0;i<denuncias.length;i++){
-                const Usuario = await buscarUsuarioDB(denuncias[i].Descricao.ID_usuario)
-                denuncias[i].nome = Usuario[0].nome
-            }
             console.log(denuncias[0])
             
             res.json({denuncias, acess:true})
