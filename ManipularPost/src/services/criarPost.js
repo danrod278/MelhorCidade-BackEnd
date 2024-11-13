@@ -5,9 +5,9 @@ exports.CriarPost = async (data, cookie, _idUser, formato, res, req) =>{
     try{
 
         if (formato=="buffer"){
-            const files = req.files   
+            var files = req.files   
         }else if(formato=="base64"){
-            const files = req.body.files
+            var files = req.body.files
         }else{
             return res.json({mensagem:"Formato de imagem inválido", acess:false})
         }

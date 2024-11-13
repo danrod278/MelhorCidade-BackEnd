@@ -39,3 +39,5 @@ exports.carregarDenunciasController = async (req, res)=>{
         res.json({mensagem:"Erro ao carregar denuncia para o usuário", erro:err})
     }
 }
+
+
