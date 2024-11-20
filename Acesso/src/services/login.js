@@ -9,7 +9,7 @@ exports.buscaCadastros = async (data)=>{
         
         if(testBusca.length>0){
             
-            return [true, testBusca[0].senha, testBusca[0]._id]
+            return [true, testBusca[0].senha, testBusca[0]._id, testBusca[0].tipoUsuario]
         }else{
             return [false]
         }
@@ -31,9 +31,9 @@ exports.logar = async (data, res, req)=>{
                 console.log(req.cookies.hashTemporario)
                 const statusGravacao = await salvarHash(usuario[2], hash)
                 
-                console.log({acesso: true, mensagem: "Acesso liberado", cookie: hash, id:usuario[2] })
+                console.log({acesso: true, mensagem: "Acesso liberado", cookie: hash, id:usuario[2], tipoUsuario:usuario[3] })
                 if(statusGravacao){
-                    res.status(200).json({ acesso: true, mensagem: "Acesso liberado", cookie: hash, id:usuario[2] });                
+                    res.status(200).json({ acesso: true, mensagem: "Acesso liberado", cookie: hash, id:usuario[2], tipoUsuario:usuario[3] });                
                 }else{
                     res.json({ acesso: false, mensagem: "Erro ao gravar hash"});
                 }
