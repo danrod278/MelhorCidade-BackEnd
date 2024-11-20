@@ -7,8 +7,6 @@ exports.controllerNovoPost = async (req, res)=>{
     try{
         const form = req.body
         const {cookie, _idUser} = req.body
-        
-        
         const postData = {
             Descricao:{
                 Categoria:form.categoria,
@@ -23,7 +21,7 @@ exports.controllerNovoPost = async (req, res)=>{
         CriarPost(postData, cookie, _idUser,form.formato, res, req)
 
     }catch(err){
-        res.status(401).json('Erro ao Criar novo post ', err)
+        res.json('Erro ao Criar novo post ', err)
     }
 }
 

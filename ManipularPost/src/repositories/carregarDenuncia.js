@@ -22,7 +22,7 @@ exports.buscarUsuarioDB = async(_idUser)=>{
 
 exports.carregarDenunciasPorTurn = async(turn)=>{
     try {
-        const denuncias = await Post.find().sort({createdAt:-1}).skip(5*turn).limit(5)
+        const denuncias = await Post.find().sort({createdAt:-1}).skip(20*turn).limit(20)
         return denuncias
     } catch (error) {
         return err
