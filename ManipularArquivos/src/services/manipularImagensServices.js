@@ -85,7 +85,7 @@ exports.salvarImagem = async (res, arrayImagens, formato)=>{
 
     }catch(err){
         console.error("Erro ao salvar a imagem "+err)
-        res.json({mensagem:"Erro ao salvar a imagem", erro:err, acess:false})
+        res.json({mensagem:"Erro ao salvar a imagem", acess:false})
     }
 }
 
