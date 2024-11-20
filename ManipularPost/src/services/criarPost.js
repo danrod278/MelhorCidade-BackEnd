@@ -48,3 +48,5 @@ exports.CriarPost = async (data, cookie, _idUser, formato, res, req) =>{
         res.json({acess:false, mensagem:"Houve algum erro ao fazer a denuncia", erro:err})
     }
 }
+
+

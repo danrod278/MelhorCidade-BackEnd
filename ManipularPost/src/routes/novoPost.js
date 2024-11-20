@@ -5,4 +5,5 @@ const {controllerNovoPost, carregarDenunciasController, carregarPostsPorDataCont
 router.post("/novaDenuncia", controllerNovoPost)
 router.post("/carregarPost", carregarDenunciasController)
 router.post("/carregarPostsPorData", carregarPostsPorDataController)
+
 module.exports = router

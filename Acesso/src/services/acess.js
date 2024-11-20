@@ -1,4 +1,4 @@
-const {buscaHash, buscadorDeId} = require("../repositories/usuarios")
+const {buscaHash, buscadorDeId, verificarCadastros} = require("../repositories/usuarios")
 
 exports.testaAcesso = async (req, res, hash, _id)=>{
     try{
@@ -34,5 +34,20 @@ exports.vericadorDeId = async (req, res, _id)=>{
     }catch(err){
         console.error('Erro ao tentar verificar o Id'+err)
         res.json({mensagem:'Erro ao tentar verificar o Id', erro:err})
+    }
+}
+
+exports.verificarADMService = async(_idUser, res)=>{
+    try {
+        var usuario = await buscadorDeId(_idUser)
+        console.log(usuario)
+        if(usuario[0].tipoUsuario=="ADM"){
+            res.json({mensagem:"É ADM", acess:true})
+        }else{
+            res.json({mensagem:"Não é ADM", acess:false})
+        }
+    } catch (error) {
+        console.error("Houve um erro ao tentar fazer a verificação de ADM")
+        res.json({mensagem:"Houve um erro ao tentar fazer a verificação de ADM", acess:true})
     }
 }

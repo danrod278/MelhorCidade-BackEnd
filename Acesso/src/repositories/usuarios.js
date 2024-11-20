@@ -42,7 +42,6 @@ exports.salvarHash = async (idUsuario, hash)=>{
 exports.buscadorDeId = async(_id)=>{
     try{
         const usuario = await Usuario.find({_id:_id})
-
         return usuario
         
     }catch(err){
