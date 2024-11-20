@@ -8,6 +8,7 @@ exports.controllerNovoPost = async (req, res)=>{
         const form = req.body
         const {cookie, _idUser} = req.body
         
+        
         const postData = {
             Descricao:{
                 Categoria:form.categoria,

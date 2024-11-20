@@ -3,13 +3,7 @@ const {salvarComentario} = require("../services/comentarios")
 exports.comentarController = async (req, res)=>{
     try{
         const {conteudo, _idUser, CodigoDenuncia} = req.body
-        const idExistente = await axios.post("http://localhost:3000/api/verificarId", {_idUser:_idUser})
-        if(idExistente.data.acess){
-            salvarComentario(_idUser, conteudo, CodigoDenuncia, res)
-        }
-        else{
-            res.json({mensagem:"esse id não existe", acess:false})
-        }
+        salvarComentario(_idUser, conteudo, CodigoDenuncia, res)
     }
     catch (err){
         console.error("Erro ao fazer comentário "+err)
