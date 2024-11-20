@@ -40,7 +40,8 @@ exports.vericadorDeId = async (req, res, _id)=>{
 exports.verificarADMService = async(_idUser, res)=>{
     try {
         var usuario = await buscadorDeId(_idUser)
-        if(usuario.tipoUsuario=="ADM"){
+        console.log(usuario)
+        if(usuario[0].tipoUsuario=="ADM"){
             res.json({mensagem:"É ADM", acess:true})
         }else{
             res.json({mensagem:"Não é ADM", acess:false})

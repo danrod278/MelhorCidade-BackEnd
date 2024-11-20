@@ -88,3 +88,87 @@ exports.salvarImagem = async (res, arrayImagens, formato)=>{
         res.json({mensagem:"Erro ao salvar a imagem", erro:err, acess:false})
     }
 }
+
+
+exports.trocarImagemService = async(files, typeFiles, res)=>{
+    const supabaseUrl = dotenvVariables.SUPABASEURL
+    const supabaseKey = dotenvVariables.SUPABASE_KEY
+    const supabase = createClient(supabaseUrl, supabaseKey)
+
+    var arrayData=[]
+    var arrayErros=[]
+    
+    for(const element of files) {
+        var buffer
+        if(!element.originalname || !element.buffer || !element.mimetype){
+            arrayErros.push(element.originalname)
+            continue
+        }
+        if(typeFiles=="base64"){
+            try {
+                buffer = Buffer.from(element.buffer, "base64")
+            } catch (error) {
+                arrayErros.push(element.originalname)
+                continue
+            }
+        }else{
+            buffer = element.buffer
+            if(!Buffer.isBuffer(buffer)){
+                arrayErros.push(element.originalname)
+                continue
+            }
+        }
+        try {
+            var path=element.originalname
+            path = path.split('Imagens/')
+            console.log(element.originalname)
+        } catch (error) {
+            console.error(error)
+            arrayErros.push(element.originalname)
+            continue
+        }
+
+        const {error } = await supabase.storage
+        .from("Imagens")
+        .upload(path[1], buffer, {
+        contentType: element.mimetype,
+        upsert: true,
+        })
+
+        if (error) {
+            console.error("Erro ao salvar a imagem com nome",element.originalname,error)
+            arrayErros.push(element.originalname)
+        } else {
+            arrayData.push(element.originalname)
+        }
+        
+    }
+    console.log(arrayData, arrayErros)
+    res.json({arrayData:arrayData, arrayErros:arrayErros})
+}
+
+
+exports.deletarImagemService = async(pathName, res)=>{
+    const supabaseUrl = dotenvVariables.SUPABASEURL
+    const supabaseKey = dotenvVariables.SUPABASE_KEY
+
+    const supabase = createClient(supabaseUrl, supabaseKey)
+    var path=pathName
+    path = path.split('Imagens/')
+
+    console.log(path[1])
+
+    if(path[1]){
+        const { error} = supabase.storage
+        .from('Imagens')
+        .remove(path[1])
+    
+        if(error){
+            console.log("Houve um erro ao deletar a imagem",error)
+            return res.json({mensagem:"Houve um erro ao deletar a imagem",acess:false})
+        }
+        return res.json({mensagem:"Imagem Deletada com sucesso", acess:true})
+    }else{
+        return res.json({mensagem:"É necessário um link válido",acess:false})
+    }
+}
