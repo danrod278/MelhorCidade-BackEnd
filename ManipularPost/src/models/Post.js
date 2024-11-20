@@ -67,6 +67,10 @@ const novoPostSchema = new Schema({
         conteudo:{
             type:String,
             required:true
+        },
+        nome:{
+            required:true,
+            type:String
         }
     }]
 }, {timestamps:true})
