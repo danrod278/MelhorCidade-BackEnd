@@ -1,6 +1,5 @@
 const {Post} = require("../models/Post")
 const {Usuario} = require("../models/Usuario")
-const { post } = require("../routes/novoPost")
 
 exports.pegarDenunciaDB = async (CodigoDenuncia)=>{
     try{
@@ -26,5 +25,19 @@ exports.carregarDenunciasPorTurn = async(turn)=>{
         return denuncias
     } catch (error) {
         return err
+    }
+}
+
+exports.apagaDenuncia = async(CodigoDenuncia)=>{
+    const testeExistencia = await this.pegarDenunciaDB(CodigoDenuncia)
+    if(testeExistencia.length>0){
+        var delet = await Post.deleteOne({CodigoDenuncia:CodigoDenuncia})
+        if(delet.deletedCount>0){
+            return {mensagem:testeExistencia[0], status:true}
+        }else{
+            return {status:false, mensagem:"Erro ao deletar a denúncia"}
+        }
+    }else{
+        return {mensagem:"necessário um Códiogo de denúncia válido", status:false}
     }
 }

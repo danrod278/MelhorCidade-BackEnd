@@ -1,6 +1,6 @@
 const {Validar, Validar_ID} = require("../repositories/validacao")
 
-exports.validarPost = async (req, res, id, CodigoDenuncia)=>{
+exports.validarPost = async (res, id, CodigoDenuncia)=>{
     try{
         const validandoId = await Validar_ID(id)
         if(validandoId.length>0){
