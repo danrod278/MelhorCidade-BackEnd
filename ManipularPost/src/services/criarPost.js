@@ -1,7 +1,8 @@
 const {SalvarPostBD} = require("../repositories/CriarPost")
 const {buscarUsuarioDB} = require("../repositories/carregarDenuncia")
 const axios = require("axios")
-
+const {dotenvVariables} = require("../../dotenvVariables")
+ 
 exports.CriarPost = async (data, cookie, _idUser, formato, res, req) =>{
     try{
 
@@ -14,7 +15,7 @@ exports.CriarPost = async (data, cookie, _idUser, formato, res, req) =>{
         }
         
         if(files.length>0 && files.length<=3){
-            const manda_files_para_axios = await axios.post('http://localhost:3003/api/salvarImagem', {files:files, _idUser:_idUser, cookie:cookie, formato:formato})
+            const manda_files_para_axios = await axios.post(dotenvVariables.MANIPULARARQUIVOS_MS+'api/salvarImagem', {files:files, _idUser:_idUser, cookie:cookie, formato:formato})
 
             if(manda_files_para_axios.data.acess){
                 

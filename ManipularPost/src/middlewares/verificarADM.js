@@ -1,9 +1,9 @@
 const axios = require("axios")
-
+const {dotenvVariables} = require("../../dotenvVariables")
 exports.verificarADMMiddleware = async(req, res, next)=>{
     try {
         const {_idUser} =req.body
-        const queryADM = await axios.post('http://localhost:3000/api/verificarADM', {_idUser:_idUser})
+        const queryADM = await axios.post(dotenvVariables.ACESS_MS+'api/verificarADM', {_idUser:_idUser})
         console.log(queryADM.data)
         if(queryADM.data.acess){
             next()

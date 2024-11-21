@@ -1,12 +1,12 @@
 const axios = require("axios")
+const {dotenvVariables} = require("../../dotenvVariables")
 
 exports.verificarCookie = async (req, res, next)=>{
-    
     try{
         const form = req.body
 
         if(form._idUser && form.cookie){
-            const permicao = await axios.post("http://localhost:3000/api/acess", {cookie:form.cookie, _idUser:form._idUser}, {
+            const permicao = await axios.post(dotenvVariables.ACESS_MS+"api/acess", {cookie:form.cookie, _idUser:form._idUser}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }})
