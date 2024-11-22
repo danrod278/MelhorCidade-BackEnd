@@ -21,7 +21,6 @@ exports.carregarDenunciaService = async(CodigoDenuncia, _idUser, cookie, res)=>{
 
 exports.carregarPostsPorIdService = async(_idUserSee, res)=>{
     const buscaPosts = await buscaPostsPorId(_idUserSee)
-    console.log(buscaPosts)
     
     if(!buscaPosts){
         return res.json({mensagem:"Esse Id não existe", acess:false})

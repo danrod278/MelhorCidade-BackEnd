@@ -8,7 +8,6 @@ exports.mudarStatusDenuncia = async (CodigoDenuncia, mudancas)=>{
         const atualizacao = await Post.updateOne(
             { CodigoDenuncia:CodigoDenuncia },
             { $set:{ OqueFoiFeito:mudancas, StatusDenuncia:"Resolvido", statusDenunciaChange: date }})
-        console.log(atualizacao)
         if(atualizacao.modifiedCount>0){
             return true
         }else{

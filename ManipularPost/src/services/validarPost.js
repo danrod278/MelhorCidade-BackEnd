@@ -5,7 +5,6 @@ exports.validarPost = async (res, id, CodigoDenuncia)=>{
         const validandoId = await Validar_ID(id)
         if(validandoId.length>0){
             const resultValidacao = await Validar(id, CodigoDenuncia)
-            console.log(resultValidacao)
             if(resultValidacao.modifiedCount>0){
                 res.json({mensagem:"Validação realizada com suceso", acess:true})
             }else{
