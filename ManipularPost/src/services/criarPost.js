@@ -29,7 +29,7 @@ exports.CriarPost = async (data, cookie, _idUser, formato, res, req) =>{
                 const Usuario = await buscarUsuarioDB(_idUser)
                 data.Descricao.Nome = Usuario[0].nome
                 data.Descricao.Imagens=arrayImagens
-                console.log(data)
+                
                 const statusRegistroSalvo = await SalvarPostBD(data)
 
                 if(statusRegistroSalvo){
