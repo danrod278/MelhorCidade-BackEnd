@@ -7,10 +7,7 @@ exports.criarUsuarioController = async (req, res)=>{
         let data = {
                 nome:params.nome,
                 email:params.email,
-                idade:params.idade,
-                telefone:params.telefone,
                 senha:params.senha,
-                endereco:params.endereco
         }
         if(data.nome && data.email && data.senha && data.endereco){
 
