@@ -1,5 +1,5 @@
 const {CriarPost} = require('../services/criarPost')
-const {carregarDenunciaService} = require("../services/carregarPostService")
+const {carregarDenunciaService, carregarPostsPorIdService} = require("../services/carregarPostService")
 const {carregarPostsPorDataService} = require("../services/carregarPostsPorDataService")
 const { v4: uuidv4 } = require('uuid');
 
@@ -54,5 +54,20 @@ exports.carregarPostsPorDataController = async(req, res)=>{
     }catch(err){
         console.error('Erro ao receber o formulário de carregarPostsPorData',err)
         res.json({mensagem:"Erro ao receber o formulário de carregarPostsPorData", err, acess:false})
+    }
+}
+
+exports.carregarPostsPorId = async(req, res)=>{
+    try {
+        const {_idUserSee} = req.body
+        if(_idUserSee){
+            carregarPostsPorIdService(_idUserSee, res)
+        }else{
+            return res.json({mensagem:"É necessário um _idUser para usar esse serviço"})
+        }
+
+    } catch (error) {
+        console.error("Erro ao carregar posts pelo id", error)
+        res.json({mensagem:"Erro ao carregar posts pelo id", acess:false})
     }
 }

@@ -1,5 +1,5 @@
 const axios = require("axios")
-const {pegarDenunciaDB, buscarUsuarioDB} = require("../repositories/carregarDenuncia")
+const {pegarDenunciaDB, buscarUsuarioDB, buscaPostsPorId} = require("../repositories/carregarDenuncia")
 
 exports.carregarDenunciaService = async(CodigoDenuncia, _idUser, cookie, res)=>{
     try{
@@ -16,5 +16,16 @@ exports.carregarDenunciaService = async(CodigoDenuncia, _idUser, cookie, res)=>{
     }catch(err){
         console.error("Erro ao tentar ler as denúncias", err)
         return res.json({mensagem:"Erro ao tentar ler as denúncias",erro:err, acess:false})
+    }
+}
+
+exports.carregarPostsPorIdService = async(_idUserSee, res)=>{
+    const buscaPosts = await buscaPostsPorId(_idUserSee)
+    console.log(buscaPosts)
+    
+    if(!buscaPosts){
+        return res.json({mensagem:"Esse Id não existe", acess:false})
+    }else{
+        return res.json({acess:true, posts:buscaPosts})
     }
 }

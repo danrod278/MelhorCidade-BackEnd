@@ -9,7 +9,7 @@ exports.buscaCadastros = async (data)=>{
         
         if(testBusca.length>0){
             
-            return [true, testBusca[0].senha, testBusca[0]._id, testBusca[0].tipoUsuario]
+            return [true, testBusca[0].senha, testBusca[0]._id, testBusca[0].tipoUsuario, testBusca[0].nome]
         }else{
             return [false]
         }
@@ -33,7 +33,7 @@ exports.logar = async (data, res, req)=>{
                 
                 console.log({acesso: true, mensagem: "Acesso liberado", cookie: hash, id:usuario[2], tipoUsuario:usuario[3] })
                 if(statusGravacao){
-                    res.status(200).json({ acesso: true, mensagem: "Acesso liberado", cookie: hash, id:usuario[2], tipoUsuario:usuario[3] });                
+                    res.status(200).json({ acesso: true, mensagem: "Acesso liberado", cookie: hash, id:usuario[2], tipoUsuario:usuario[3], nome:usuario[4] });                
                 }else{
                     res.json({ acesso: false, mensagem: "Erro ao gravar hash"});
                 }

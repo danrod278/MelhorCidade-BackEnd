@@ -43,3 +43,13 @@ exports.apagaDenuncia = async(CodigoDenuncia)=>{
     }
 }
 
+exports.buscaPostsPorId = async(_idUser)=>{
+    
+    const buscausuario = await this.buscarUsuarioDB(_idUser)
+    if(buscausuario.length>0){
+        const posts = await Post.find({"Descricao.ID_usuario":_idUser})
+        return posts    
+    }else{
+        return false
+    }
+}
