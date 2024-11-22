@@ -76,8 +76,9 @@ const novoPostSchema = new Schema({
     OqueFoiFeito:{
         type:String,
         required:false,
-        timestamps:true
-    }
+    },
+    statusDenunciaChange:Date
+    
 }, {timestamps:true})
 const Post = mongoose.model("Post", novoPostSchema)
 

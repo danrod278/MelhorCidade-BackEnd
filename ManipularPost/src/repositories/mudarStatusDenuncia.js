@@ -4,7 +4,10 @@ const {buscarPost} = require("../repositories/validacao")
 exports.mudarStatusDenuncia = async (CodigoDenuncia, mudancas)=>{
     const testeExistenciaPost = await buscarPost(CodigoDenuncia)
     if(testeExistenciaPost.length>0){
-        const atualizacao = await Post.updateOne({CodigoDenuncia:CodigoDenuncia},{OqueFoiFeito:mudancas, StatusDenuncia:"Resolvido"})
+        const date = new Date()
+        const atualizacao = await Post.updateOne(
+            { CodigoDenuncia:CodigoDenuncia },
+            { $set:{ OqueFoiFeito:mudancas, StatusDenuncia:"Resolvido", statusDenunciaChange: date }})
         console.log(atualizacao)
         if(atualizacao.modifiedCount>0){
             return true
