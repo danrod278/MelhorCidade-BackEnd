@@ -27,7 +27,7 @@ const novoUsuarioSchemma = new Schema({
     },
     endereco:{
         type: String,
-        required:true
+        required:false
     },
     _id:{
         type: String,
