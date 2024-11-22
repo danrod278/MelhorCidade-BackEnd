@@ -7,7 +7,6 @@ exports.criarUsuarioController = async (req, res)=>{
                 email:params.email,
                 senha:params.senha,
         }
-        console.log(data)
         logar(data, res, req)
     }catch(err){
         console.error('Erro ao criar novo usuario ' +err)

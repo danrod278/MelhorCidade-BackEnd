@@ -9,7 +9,7 @@ exports.criarUsuarioController = async (req, res)=>{
                 email:params.email,
                 senha:params.senha,
         }
-        console.log(data)
+        
         if(data.nome && data.email && data.senha ){
 
             criarUsuario(data, res)

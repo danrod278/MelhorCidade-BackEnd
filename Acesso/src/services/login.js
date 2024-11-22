@@ -28,7 +28,7 @@ exports.logar = async (data, res, req)=>{
                 const hash = uuidv4();
                 res.cookie("hashTemporario", hash, { maxAge: 90000 })
                 res.cookie("IDUsuario", usuario[2], {maxAge: 90000})
-                console.log(req.cookies.hashTemporario)
+                
                 const statusGravacao = await salvarHash(usuario[2], hash)
                 
                 console.log({acesso: true, mensagem: "Acesso liberado", cookie: hash, id:usuario[2], tipoUsuario:usuario[3] })

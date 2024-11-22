@@ -27,7 +27,7 @@ exports.criarUsuario = async (data, res)=>{
             data._id = uuidv4()
             data.senha = await criptografarSenha(data.senha)
             data.tipoUsuario="comum"
-            //console.log(data)
+            
             const salvoStatus = await NovoUsuario(data)
             if(salvoStatus){
                 res.json({mensagem:"Conta criada com sucesso", acess:true})

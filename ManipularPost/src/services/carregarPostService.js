@@ -1,5 +1,5 @@
 const axios = require("axios")
-const {pegarDenunciaDB, buscarUsuarioDB, buscaPostsPorId} = require("../repositories/carregarDenuncia")
+const {pegarDenunciaDB, buscarUsuarioDB, buscaPostsPorId, consultarComFiltro} = require("../repositories/carregarDenuncia")
 
 exports.carregarDenunciaService = async(CodigoDenuncia, _idUser, cookie, res)=>{
     try{
@@ -26,5 +26,15 @@ exports.carregarPostsPorIdService = async(_idUserSee, res)=>{
         return res.json({mensagem:"Esse Id não existe", acess:false})
     }else{
         return res.json({acess:true, posts:buscaPosts})
+    }
+}
+
+
+exports.carregarComFiltrosService = async(filtro, turn, res)=>{
+    if(filtro=="validacao" || filtro=="tempo" || filtro=="resolvido"){
+        const denuncias = await consultarComFiltro(turn, filtro)
+        return res.json({denuncias:denuncias, acess:true})
+    }else{
+        res.json({mensagem:"Nenhum filtro encontrado. Tente por [validacao, tempo, resolvido]", acess:false})
     }
 }

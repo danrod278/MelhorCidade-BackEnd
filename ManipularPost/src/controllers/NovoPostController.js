@@ -1,5 +1,5 @@
 const {CriarPost} = require('../services/criarPost')
-const {carregarDenunciaService, carregarPostsPorIdService} = require("../services/carregarPostService")
+const {carregarDenunciaService, carregarPostsPorIdService, carregarComFiltrosService} = require("../services/carregarPostService")
 const {carregarPostsPorDataService} = require("../services/carregarPostsPorDataService")
 const { v4: uuidv4 } = require('uuid');
 
@@ -69,5 +69,15 @@ exports.carregarPostsPorId = async(req, res)=>{
     } catch (error) {
         console.error("Erro ao carregar posts pelo id", error)
         res.json({mensagem:"Erro ao carregar posts pelo id", acess:false})
+    }
+}
+
+exports.carregarComFiltrosController = async(req, res)=>{
+    try {
+        const {turn, filtro} = req.body
+        carregarComFiltrosService(filtro, turn, res)
+    } catch (error) {
+        console.log("Erro ao tentar filtrar denúncias", error)       
+        return res.json({mensagem:"Erro ao tentar filtrar denúncias", acess:false})
     }
 }

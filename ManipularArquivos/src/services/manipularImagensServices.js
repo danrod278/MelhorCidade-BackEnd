@@ -30,7 +30,7 @@ exports.salvarImagem = async (res, arrayImagens, formato)=>{
                         let {error:urlErro, data:urlData} = supabase.storage.from(bucketName).getPublicUrl(pathName)
                         arrayCaminhos.push(urlData)
                         if(urlErro){
-                            console.log(urlErro, element)
+                            
                             arrayErros.push(urlErro)
                         }
                     }
@@ -121,7 +121,6 @@ exports.trocarImagemService = async(files, typeFiles, res)=>{
         try {
             var path=element.originalname
             path = path.split('Imagens/')
-            console.log(element.originalname)
         } catch (error) {
             console.error(error)
             arrayErros.push(element.originalname)
@@ -155,8 +154,6 @@ exports.deletarImagemService = async(pathName, res)=>{
     const supabase = createClient(supabaseUrl, supabaseKey)
     var path=pathName
     path = path.split('Imagens/')
-
-    console.log(path[1])
 
     if(path[1]){
         const { error} = supabase.storage

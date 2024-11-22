@@ -53,3 +53,36 @@ exports.buscaPostsPorId = async(_idUser)=>{
         return false
     }
 }
+
+exports.consultarComFiltro = async(turn, filtro) =>{
+    const aggragateValidacao = [
+        {$addFields:{tamanhoArray:{$size:"$Validacoes"}}},
+        {$sort:{tamanhoArray:-1}},
+        {$project:{tamanhoArray:0}},
+        { $skip: turn * 15 },
+        { $limit: 15 }
+    ]
+    const aggragateTempo = [
+        {$sort:{createdAt:1}},
+        { $skip: turn * 15 },
+        { $limit: 15 }
+    ]
+    const aggragateResolvido = [
+        {$sort:{statusDenunciaChange:-1}},
+        { $skip: turn * 15 },
+        { $limit: 15 }
+    ]
+
+    var aggragateMain=[]
+    if(filtro=="validacao"){
+        aggragateMain=aggragateValidacao
+    }else if(filtro=="tempo"){
+        aggragateMain=aggragateTempo
+    }else if(filtro=="resolvido"){
+        aggragateMain=aggragateResolvido
+    }
+    console.log(aggragateMain)
+    const denuncias = await Post.aggregate(aggragateMain)
+    return denuncias
+
+}
