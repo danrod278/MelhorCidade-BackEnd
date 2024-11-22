@@ -4,9 +4,7 @@ exports.carregarPostsPorDataService = async(turn, res)=>{
     try{
 
         var denuncias = await carregarDenunciasPorTurn(turn)
-        if(denuncias){
-            console.log(denuncias[0])
-            
+        if(denuncias){            
             res.json({denuncias, acess:true})
         }else{
             console.error("Erro ao tentar buscar as ultimas denúncias",err)
