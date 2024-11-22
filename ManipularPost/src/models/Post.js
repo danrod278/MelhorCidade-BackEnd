@@ -72,7 +72,12 @@ const novoPostSchema = new Schema({
             required:true,
             type:String
         }
-    }]
+    }],
+    OqueFoiFeito:{
+        type:String,
+        required:false,
+        timestamps:true
+    }
 }, {timestamps:true})
 const Post = mongoose.model("Post", novoPostSchema)
 
