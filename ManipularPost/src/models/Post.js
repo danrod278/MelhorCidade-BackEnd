@@ -41,10 +41,10 @@ const novoPostSchema = new Schema({
     CoordenadasOcorrencia:{
         type: {
             type: String,
-            enum: ['Point'], // Definindo como 'Point' para uso geoespacial
+            enum: 'Point', // Definindo como 'Point' para uso geoespacial
             required: true
         },
-        coordenadas: {
+        coordinates: {
             type: [Number], // Array com [longitude, latitude]
             required: true
         }
@@ -80,6 +80,9 @@ const novoPostSchema = new Schema({
     statusDenunciaChange:Date
     
 }, {timestamps:true})
+
+novoPostSchema.index({ CoordenadasOcorrencia: '2dsphere' });
+
 const Post = mongoose.model("Post", novoPostSchema)
 
 module.exports = {Post}

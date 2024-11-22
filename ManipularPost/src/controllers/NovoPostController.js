@@ -18,7 +18,7 @@ exports.controllerNovoPost = async (req, res)=>{
             },
             CodigoDenuncia:uuidv4(),
             StatusDenuncia:"Em aberto",
-            CoordenadasOcorrencia:{type:"Point", coordenadas:form.CoordenadasOcorrencia}
+            CoordenadasOcorrencia:{type:"Point", coordinates:form.CoordenadasOcorrencia}
         }
         CriarPost(postData, cookie, _idUser,form.formato, res, req)
 
@@ -81,3 +81,4 @@ exports.carregarComFiltrosController = async(req, res)=>{
         return res.json({mensagem:"Erro ao tentar filtrar denúncias", acess:false})
     }
 }
+
