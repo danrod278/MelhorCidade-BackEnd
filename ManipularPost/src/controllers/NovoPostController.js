@@ -1,5 +1,5 @@
 const {CriarPost} = require('../services/criarPost')
-const {carregarDenunciaService, carregarPostsPorIdService, carregarComFiltrosService} = require("../services/carregarPostService")
+const {carregarDenunciaService, carregarPostsPorIdService, carregarComFiltrosService, carregarPostsPorLocalizacaoService} = require("../services/carregarPostService")
 const {carregarPostsPorDataService} = require("../services/carregarPostsPorDataService")
 const { v4: uuidv4 } = require('uuid');
 
@@ -82,3 +82,18 @@ exports.carregarComFiltrosController = async(req, res)=>{
     }
 }
 
+
+exports.carregarPostsPorLocalizacaoController = async(req, res)=>{
+    try {
+        const {coordenadas, zoom} = req.body
+        if(zoom>0 && coordenadas.length==2){
+            carregarPostsPorLocalizacaoService(coordenadas, zoom, res)
+        }else{
+            return res.json({mensagem:"É necessário zoom e [coordenadas] (além de cookie e _idUser)", acess:false})
+        }
+    } catch (error) {
+        console.error("Houve um erro ao carregar as denúncias por localização", error)
+        return res.json({mensagem:"Houve um erro ao carregar as denúncias por localização", acess:false})
+        
+    }
+}

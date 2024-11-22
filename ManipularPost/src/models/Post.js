@@ -81,7 +81,7 @@ const novoPostSchema = new Schema({
     
 }, {timestamps:true})
 
-novoPostSchema.index({ CoordenadasOcorrencia: '2dsphere' });
+novoPostSchema.index({ "CoordenadasOcorrencia.coordinates": '2dsphere' });
 
 const Post = mongoose.model("Post", novoPostSchema)
 

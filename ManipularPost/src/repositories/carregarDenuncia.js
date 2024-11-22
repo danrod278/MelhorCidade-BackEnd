@@ -86,3 +86,9 @@ exports.consultarComFiltro = async(turn, filtro) =>{
     return denuncias
 
 }
+
+exports.carregarPostLocalizacao = async(coordenadas, raio)=>{
+    const aggregate =  [ { $geoNear: { near: { type: "Point", coordinates: [coordenadas[0], coordenadas[1]]}, distanceField: "dist.calculated", maxDistance: 2200*raio, spherical: true } }]
+    const denuncias = await Post.aggregate(aggregate)
+    return denuncias
+}

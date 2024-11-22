@@ -1,5 +1,5 @@
 const axios = require("axios")
-const {pegarDenunciaDB, buscarUsuarioDB, buscaPostsPorId, consultarComFiltro} = require("../repositories/carregarDenuncia")
+const {pegarDenunciaDB, buscarUsuarioDB, buscaPostsPorId, consultarComFiltro, carregarPostLocalizacao} = require("../repositories/carregarDenuncia")
 
 exports.carregarDenunciaService = async(CodigoDenuncia, _idUser, cookie, res)=>{
     try{
@@ -36,5 +36,15 @@ exports.carregarComFiltrosService = async(filtro, turn, res)=>{
         return res.json({denuncias:denuncias, acess:true})
     }else{
         res.json({mensagem:"Nenhum filtro encontrado. Tente por [validacao, tempo, resolvido]", acess:false})
+    }
+}
+
+exports.carregarPostsPorLocalizacaoService = async(coordenadas, zoom, res)=>{
+    if(coordenadas[0]!=undefined && coordenadas[1]!=undefined){
+        const denuncias = await carregarPostLocalizacao(coordenadas, zoom)
+        console.log(denuncias)
+        return res.json({denuncias:denuncias, acess:true})
+    }else{
+        res.json({mensagem:"É necessário uma coordenada.", acess:false})
     }
 }
