@@ -81,7 +81,7 @@ exports.consultarComFiltro = async(turn, filtro) =>{
     }else if(filtro=="resolvido"){
         aggragateMain=aggragateResolvido
     }
-    console.log(aggragateMain)
+    
     const denuncias = await Post.aggregate(aggragateMain)
     return denuncias
 
